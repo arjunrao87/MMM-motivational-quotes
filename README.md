@@ -11,7 +11,5 @@ Motivational Quotes Module for MagicMirror<sup>2</sup>
 
 ## Installation
 
-## Available carriers
-
 ## Config Options
 |
