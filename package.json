@@ -1,0 +1,24 @@
+{
+  "name": "mmm-motivational-quotes",
+  "version": "1.0.0",
+  "description": "Motivational Quotes Module for MagicMirror",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjunrao87/MMM-motivational-quotes.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "motivational quotes"
+  ],
+  "author": "arjunrao87",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arjunrao87/MMM-motivational-quotes/issues"
+  },
+  "homepage": "https://github.com/arjunrao87/MMM-motivational-quotes#readme",
+  "dependencies": {
+    "jsdom": "^9.4.2",
+    "async": "^2.0.1",
+    "request": "^2.74.0"
+  }
+}
