@@ -57,10 +57,14 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
                 items.push({
                     quote: quote,
                     author: author,
-                    url: quoteLink
+                    url: quoteLink,
                 });
+                self.broadcastItems();
+                scheduleTimer();
             } else {
                 console.log("Invalid quote received without text.");
+                fetchFailedCallback( self, "Invalid quote received without text.");
+                scheduleTimer();
             }
         });
     };
