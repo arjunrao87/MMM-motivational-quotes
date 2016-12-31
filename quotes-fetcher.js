@@ -41,23 +41,7 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
         clearTimeout(reloadTimer);
         reloadTimer = null;
         items = [];
-        var requestURL = url + params;
-        var requestParams = {};
-        var pairs = params.split( "&" );
-        for ( var pair of pairs ){
-          var keyValue = pair.split( "=" );
-          requestParams[keyValue[0]] = keyValue[1];
-        }
-        console.log( JSON.stringify( requestParams) );
-        request.post({
-            url: url,
-            method: 'POST',
-            json: {
-              method: "getQuote",
-              lang : "en",
-              format : "json",
-            }
-        }, function(error, response, body) {
+        request.get(url, function(error, response, body) {
             if (error ) {
                 console.log("Error encountered in post request " + error);
             }

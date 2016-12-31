@@ -5,9 +5,9 @@ Module.register("MMM-motivational-quotes", {
         feeds: [{
             title: "Forismatic",
             shortname: "forismatic",
-            url: "http://api.forismatic.com/api/1.0/",
-            parameters: "method=getQuote&format=json&lang=en",
-            type: "POST",
+            url: "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en",
+            parameters:''
+            type: "GET",
             encoding: "UTF-8"
         }, ],
         showAuthor: true,
