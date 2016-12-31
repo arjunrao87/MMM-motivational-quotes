@@ -49,9 +49,11 @@ Module.register("MMM-motivational-quotes", {
 
         // Send notification
         this.sendSocketNotification("CONFIG", this.config);
+        Log.info( "Sent CONFIG socket notification." );
     },
 
     socketNotificationReceived: function(notification, payload) {
+        Log.info( "Received socket notification = " + notification );
         if (notification === "QUOTES") {
             this.generateQuotes(payload);
             if (!this.loaded) {

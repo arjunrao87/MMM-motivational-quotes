@@ -41,9 +41,9 @@ module.exports = NodeHelper.create({
 		var url = feed.url || "";
 		var encoding = feed.encoding || "UTF-8";
 		var reloadInterval = config.reloadInterval || 5 * 60 * 1000;
-    var type = config.type;
+    var type = feed.type;
     var showAuthor = config.showAuthor;
-    var params = config.parameters;
+    var params = feed.parameters;
 
     // Simple debugging/logging
     console.log( "Received request with following parameters :  " );
