@@ -6,7 +6,7 @@ Module.register("MMM-motivational-quotes", {
             title: "Forismatic",
             shortname: "forismatic",
             url: "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en",
-            parameters:''
+            parameters:'',
             type: "GET",
             encoding: "UTF-8"
         }, ],
