@@ -42,92 +42,100 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
         reloadTimer = null;
         items = [];
         request.get(url, function(error, response, body) {
-            if (error ) {
-                console.log("Error encountered in post request " + error);
-            }
-            if ( response.body.error ){
-              console.log("Error encountered in post request body" + response.body.error );
-            }
-            console.log("Body = " + JSON.stringify(body) + ", Response = " + JSON.stringify(response) + ", Error = " + JSON.stringify(error));
-            var content = JSON.parse(body);
-            var quote = content.quoteText;
-            var author = content.quoteAuthor;
-            var quoteLink = content.quoteLink;
-            if (quote) {
-                items.push({
-                    quote: quote,
-                    author: author,
-                    url: quoteLink,
-                });
-                self.broadcastItems();
-                scheduleTimer();
+                if (error) {
+                    console.log("Error encountered in post request " + error);
+                }
+                if (response.body.error) {
+                    console.log("Error encountered in post request body" + response.body.error);
+                }
+                console.log("Body = " + JSON.stringify(body) + ", Response = " + JSON.stringify(response) + ", Error = " + JSON.stringify(error));
+                try {
+                    body = body.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                    var content = JSON.parse(body);
+                    var quote = content.quoteText;
+                    var author = content.quoteAuthor;
+                    var quoteLink = content.quoteLink;
+                    if (quote) {
+                        items.push({
+                            quote: quote,
+                            author: author,
+                            url: quoteLink,
+                        });
+                        self.broadcastItems();
+                        scheduleTimer();
+                    }
+                } catch (err) {
+                    console.log("Error while parsing response : " + err);
+                    fetchFailedCallback(self, "Invalid quote received without text.");
+                    scheduleTimer();
+                }
             } else {
                 console.log("Invalid quote received without text.");
-                fetchFailedCallback( self, "Invalid quote received without text.");
+                fetchFailedCallback(self, "Invalid quote received without text.");
                 scheduleTimer();
             }
         });
-    };
+};
 
-    /* scheduleTimer()
-     * Schedule the timer for the next update.
-     */
+/* scheduleTimer()
+ * Schedule the timer for the next update.
+ */
 
-    var scheduleTimer = function() {
-        //console.log('Schedule update timer.');
-        clearTimeout(reloadTimer);
-        reloadTimer = setTimeout(function() {
-            fetchQuotes();
-        }, reloadInterval);
-    };
-
-    /* public methods */
-
-    /* setReloadInterval()
-     * Update the reload interval, but only if we need to increase the speed.
-     *
-     * attribute interval number - Interval for the update in milliseconds.
-     */
-    this.setReloadInterval = function(interval) {
-        if (interval > 1000 && interval < reloadInterval) {
-            reloadInterval = interval;
-        }
-    };
-
-    /* startFetch()
-     * Initiate fetchQuotes();
-     */
-    this.startFetch = function() {
+var scheduleTimer = function() {
+    //console.log('Schedule update timer.');
+    clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(function() {
         fetchQuotes();
-    };
+    }, reloadInterval);
+};
 
-    /* broadcastItems()
-     * Broadcast the existing items.
-     */
-    this.broadcastItems = function() {
-        if (items.length <= 0) {
-            //console.log('No items to broadcast yet.');
-            return;
-        }
-        //console.log('Broadcasting ' + items.length + ' items.');
-        itemsReceivedCallback(self);
-    };
+/* public methods */
 
-    this.onReceive = function(callback) {
-        itemsReceivedCallback = callback;
-    };
+/* setReloadInterval()
+ * Update the reload interval, but only if we need to increase the speed.
+ *
+ * attribute interval number - Interval for the update in milliseconds.
+ */
+this.setReloadInterval = function(interval) {
+    if (interval > 1000 && interval < reloadInterval) {
+        reloadInterval = interval;
+    }
+};
 
-    this.onError = function(callback) {
-        fetchFailedCallback = callback;
-    };
+/* startFetch()
+ * Initiate fetchQuotes();
+ */
+this.startFetch = function() {
+    fetchQuotes();
+};
 
-    this.url = function() {
-        return url + params;
-    };
+/* broadcastItems()
+ * Broadcast the existing items.
+ */
+this.broadcastItems = function() {
+    if (items.length <= 0) {
+        //console.log('No items to broadcast yet.');
+        return;
+    }
+    //console.log('Broadcasting ' + items.length + ' items.');
+    itemsReceivedCallback(self);
+};
 
-    this.items = function() {
-        return items;
-    };
+this.onReceive = function(callback) {
+    itemsReceivedCallback = callback;
+};
+
+this.onError = function(callback) {
+    fetchFailedCallback = callback;
+};
+
+this.url = function() {
+    return url + params;
+};
+
+this.items = function() {
+    return items;
+};
 };
 
 module.exports = Fetcher;
