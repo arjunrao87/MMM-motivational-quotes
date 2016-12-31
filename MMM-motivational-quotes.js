@@ -12,7 +12,7 @@ Module.register("MMM-motivational-quotes", {
         }, ],
         showAuthor: true,
         showFeedName: false,
-        reloadInterval: 10 * 1000, // Every 8 minutes
+        reloadInterval: 8 * 60 * 1000, // Every 8 minutes
         updateInterval: 10 * 1000,
         animationSpeed: 2.5 * 1000,
         maxQuotes: 0, // 0 for unlimited
