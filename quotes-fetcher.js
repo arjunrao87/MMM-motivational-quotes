@@ -64,15 +64,16 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
                         self.broadcastItems();
                         scheduleTimer();
                     }
+                    else {
+                        console.log("Invalid quote received without text.");
+                        fetchFailedCallback(self, "Invalid quote received without text.");
+                        scheduleTimer();
+                    }
                 } catch (err) {
                     console.log("Error while parsing response : " + err);
                     fetchFailedCallback(self, "Invalid quote received without text.");
                     scheduleTimer();
                 }
-            } else {
-                console.log("Invalid quote received without text.");
-                fetchFailedCallback(self, "Invalid quote received without text.");
-                scheduleTimer();
             }
         });
 };
