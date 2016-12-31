@@ -53,9 +53,9 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
             url: url,
             method: 'POST',
             json: {
-              method: getQuote,
-              lang : en,
-              format : json
+              method: "getQuote",
+              lang : "en",
+              format : "json",
             }
         }, function(error, response, body) {
             if (error ) {
