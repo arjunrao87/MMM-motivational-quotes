@@ -46,7 +46,7 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
         var pairs = params.split( "&" );
         for ( var pair of pairs ){
           var keyValue = pair.split( "=" );
-          requestParams[keyValue[0]] = "\'"+ keyValue[1] + "\'";
+          requestParams[keyValue[0]] = keyValue[1];
         }
         console.log( JSON.stringify( requestParams) );
         request.post({
