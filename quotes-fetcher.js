@@ -46,6 +46,7 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
       if( error ){
         console.log( "Error encountered in post request " + error );
       }
+      console.log( "Body = " + body + ", Response = " + response + ", Error = " + error );
       var content = JSON.parse( body );
       var quote = content.quoteText;
       var author = content.quoteAuthor;
