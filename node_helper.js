@@ -19,6 +19,7 @@ module.exports = NodeHelper.create({
 	// Subclass socketNotificationReceived received.
 	socketNotificationReceived: function(notification, payload) {
     // Received a notification to add a quotes feed
+    console.log( "Received socket notification = " + notification );
 		if (notification === "ADD_FEED") {
 			this.createFetcher(payload.feed, payload.config);
 			return;

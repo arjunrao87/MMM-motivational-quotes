@@ -1,8 +1,7 @@
 Module.register("MMM-motivational-quotes", {
-
     // Default module config
     defaults: {
-        defaultQuote: "If you ain't first, you're last!"
+        defaultQuote: "If you ain't first, you're last!",
         feeds: [{
             title: "Forismatic",
             shortname: "forismatic",
