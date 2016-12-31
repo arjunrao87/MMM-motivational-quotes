@@ -19,4 +19,4 @@ For small patches, feel free to submit pull requests directly for them. For larg
 
 # Contributing documentation
 
-Documentation contributions are very welcome! The best way to send contributions is as emails through the mailing list.
+Documentation contributions are very welcome! The best way to send contributions is by reaching out to me directly and we can get a pull request going!
