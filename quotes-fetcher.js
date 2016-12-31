@@ -53,7 +53,7 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
             var quote = content.quoteText;
             var author = content.quoteAuthor;
             var quoteLink = content.quoteLink;
-            if (quoteText) {
+            if (quote) {
                 items.push({
                     quote: quote,
                     author: author,
