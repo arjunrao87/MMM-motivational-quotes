@@ -52,10 +52,17 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
         request.post({
             url: url,
             method: 'POST',
-            json: requestParams
+            json: {
+              method:'getQuote',
+              lang : 'en',
+              format : 'json'
+            }
         }, function(error, response, body) {
-            if (error) {
+            if (error ) {
                 console.log("Error encountered in post request " + error);
+            }
+            if ( response.body.error ){
+              console.log("Error encountered in post request body" + response.body.error );
             }
             console.log("Body = " + JSON.stringify(body) + ", Response = " + JSON.stringify(response) + ", Error = " + JSON.stringify(error));
             var content = JSON.parse(body);
