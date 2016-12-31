@@ -50,7 +50,7 @@ var Fetcher = function(url, params, reloadInterval, encoding, type, showAuthor) 
             }
             console.log("Body = " + JSON.stringify(body) + ", Response = " + JSON.stringify(response) + ", Error = " + JSON.stringify(error));
             try {
-                body = body.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                body = body.replace("\\'", "'");
                 var content = JSON.parse(body);
                 var quote = content.quoteText;
                 var author = content.quoteAuthor;
